@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CelVex.Store - simple online shopping in Pakistan.">
+<title>CelVex.Store | Online Shopping</title>
+<style>
+:root{--navy:#173653;--blue:#2874c7;--light:#f4f7fb;--line:#e6ebf1;--text:#26394d;--muted:#8290a0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;color:var(--text);background:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+button{cursor:pointer}
+.container{width:min(1120px,calc(100% - 32px));margin:auto}
+.topbar{background:var(--navy);color:#fff;text-align:center;padding:7px 10px;font-size:11px}
+.header{display:grid;grid-template-columns:210px 1fr auto;align-items:center;gap:22px;padding-top:18px;padding-bottom:16px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--navy)}
+.logo{height:40px;width:40px;border-radius:9px;background:var(--navy);color:white;display:grid;place-items:center;font-size:24px;font-weight:bold}
+.brand-name{font-size:20px;font-weight:800;letter-spacing:-.6px}
+.tagline{font-size:8px;letter-spacing:2px;color:#8b9aaa;font-weight:bold;margin-top:3px}
+.search{height:40px;display:flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.search input{min-width:0;flex:1;border:0;outline:0;padding:0 13px;font-size:12px}
+.search button{width:45px;border:0;background:var(--blue);color:white;font-size:18px}
+.header-actions{display:flex;gap:15px}
+.header-actions button{border:0;background:none;color:var(--navy);font-size:10px}
+.header-actions span{display:block;font-size:19px;margin-bottom:2px}
+.nav{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.nav-inner{display:flex;gap:27px;align-items:center;min-height:42px;overflow-x:auto;white-space:nowrap}
+.nav a{font-size:11px;font-weight:bold;color:#526579}
+.nav a:first-child{color:var(--blue)}
+.hero{margin-top:22px;background:var(--light);border-radius:8px;min-height:260px;display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden}
+.hero-copy{padding:32px 0 32px 38px}
+.kicker{font-size:10px;color:var(--blue);font-weight:bold;letter-spacing:1.5px}
+.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.12;color:var(--navy);letter-spacing:-1.2px;margin:12px 0}
+.hero p{font-size:13px;line-height:1.7;color:var(--muted);max-width:360px}
+.primary-btn{display:inline-block;background:var(--blue);color:white;border:0;border-radius:4px;padding:11px 18px;font-size:11px;font-weight:bold;margin-top:17px}
+.hero-image{height:260px;display:flex;align-items:center;justify-content:center;padding:15px}
+.hero-image img{width:32%;height:170px;object-fit:contain;mix-blend-mode:multiply}
+.hero-image img:nth-child(2){height:210px}
+.section{padding-top:30px}
+.section-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.section-heading h2{font-size:19px;color:var(--navy)}
+.section-heading a{font-size:11px;color:var(--blue);font-weight:bold}
+.categories{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.category{border:1px solid var(--line);border-radius:6px;text-align:center;padding:12px 8px}
+.category img{height:90px;width:100%;object-fit:contain;mix-blend-mode:multiply}
+.category h3{font-size:11px;margin-top:8px;color:#40556a}
+.products{padding-bottom:38px}
+.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.product{border:1px solid var(--line);border-radius:6px;padding:10px;min-width:0}
+.product img{width:100%;height:155px;object-fit:contain;background:#f7f9fb;border-radius:4px;mix-blend-mode:multiply}
+.product h3{font-size:11px;margin-top:10px;min-height:27px;color:#344a60}
+.rating{font-size:10px;color:#d69a32;margin-top:5px}
+.price{font-size:13px;font-weight:bold;color:var(--navy);margin-top:7px}
+.add-btn{width:100%;padding:9px 5px;margin-top:10px;border:1px solid #d8e4f0;border-radius:4px;background:#f5f9fd;color:var(--blue);font-size:10px;font-weight:bold}
+.add-btn:hover{background:var(--blue);color:#fff}
+footer{background:#173653;color:#fff;border-top:3px solid #2874c7;padding:30px 0 14px}
+.footer-content{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-about{max-width:290px}
+footer h3{font-size:12px;color:#fff;margin-bottom:10px}
+footer p,footer a{display:block;font-size:10px;line-height:1.9;color:#c4d2e0}
+footer a:hover{color:#fff}
+.copyright{text-align:center;border-top:1px solid #36536d;padding-top:13px;margin-top:20px;font-size:9px;color:#aebfd0}
+.cart-panel{display:none;position:fixed;inset:0;background:#10243b77;z-index:5}
+.cart-panel.open{display:block}
+.cart-box{background:white;width:min(350px,100%);height:100%;margin-left:auto;padding:18px;display:flex;flex-direction:column}
+.cart-title{display:flex;justify-content:space-between;align-items:center;padding-bottom:13px;border-bottom:1px solid var(--line);color:var(--navy)}
+.cart-title button{border:0;background:#edf2f7;border-radius:4px;padding:5px 10px;font-size:18px}
+.cart-items{flex:1;overflow:auto}
+.cart-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.cart-row img{width:48px;height:48px;object-fit:contain;background:#f7f9fb}
+.cart-row div{flex:1}
+.cart-row strong{display:block;font-size:10px}
+.cart-row small{font-size:10px;color:var(--muted)}
+.cart-row button{border:0;background:none;color:#b64c5b;font-size:10px}
+.cart-total{display:flex;justify-content:space-between;padding-top:12px;font-size:13px;font-weight:bold;color:var(--navy)}
+.checkout{border:0;background:var(--blue);color:white;border-radius:4px;padding:11px;margin-top:12px;font-size:11px;font-weight:bold}
+.empty{padding:30px 5px;text-align:center;font-size:12px;color:var(--muted)}
+.notice{position:fixed;bottom:15px;left:50%;transform:translate(-50%,15px);opacity:0;background:var(--navy);color:#fff;padding:9px 14px;border-radius:5px;font-size:11px;transition:.2s;z-index:8}
+.notice.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){
+ .header{grid-template-columns:175px 1fr auto;gap:12px}
+ .hero{min-height:225px}.hero-image{height:225px}
+ .categories{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:560px){
+ .container{width:calc(100% - 24px)}
+ .header{grid-template-columns:1fr auto;gap:12px;padding-top:13px}
+ .brand-name{font-size:17px}.logo{width:36px;height:36px}
+ .header-actions{gap:10px}
+ .header-actions button{font-size:9px}
+ .search{grid-column:1/-1;grid-row:2;height:38px}
+ .nav-inner{gap:20px;min-height:39px}
+ .nav a{font-size:10px}
+ .hero{grid-template-columns:1fr 38%;min-height:190px;margin-top:14px}
+ .hero-copy{padding:20px 0 20px 15px}
+ .hero h1{font-size:clamp(22px,6vw,29px)}
+ .hero p{font-size:10px;line-height:1.5}
+ .hero-image{height:190px;padding:5px}
+ .hero-image img{height:95px}.hero-image img:nth-child(2){height:125px}
+ .primary-btn{padding:9px 12px;font-size:10px}
+ .section{padding-top:24px}
+ .section-heading h2{font-size:16px}
+ .categories{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+ .category{padding:8px 4px}
+ .category img{height:65px}
+ .category h3{font-size:9px}
+ .product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .product{padding:7px}
+ .product img{height:clamp(115px,38vw,155px)}
+ .product h3{font-size:10px}
+ .footer-content{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+ .footer-about{grid-column:1/-1}
+}
+@media(max-width:350px){
+ .container{width:calc(100% - 18px)}
+ .brand-name{font-size:15px}.tagline{font-size:7px}
+ .header-actions{gap:6px}
+ .hero{grid-template-columns:1fr 32%}
+ .hero h1{font-size:21px}
+ .hero-image img{height:75px}.hero-image img:nth-child(2){height:100px}
+ .categories{gap:5px}
+ .category img{height:55px}
+ .product img{height:112px}
+}
+</style>
+</head>
+<body>
+<div class="topbar">Welcome to CelVex.Store · Shopping made simple</div>
+<header>
+ <div class="container header">
+  <a class="brand" href="#home"><span class="logo">C</span><span><span class="brand-name">CelVex.Store</span><span class="tagline">SHOP WITH CONFIDENCE</span></span></a>
+  <form class="search" id="searchForm"><input id="searchInput" type="search" placeholder="Search for products..." aria-label="Search products"><button aria-label="Search">⌕</button></form>
+  <div class="header-actions"><button id="wishlistBtn"><span>♡</span>Wishlist</button><button id="cartBtn"><span>🛒</span>Cart (<b id="cartCount">0</b>)</button></div>
+ </div>
+ <nav class="nav"><div class="container nav-inner"><a href="#home">Home</a><a href="#categories">Categories</a><a href="#products">Shop</a><a href="#products">Best Sellers</a><a href="#footer">Contact</a></div></nav>
+</header>
+<main class="container" id="home">
+ <section class="hero"><div class="hero-copy"><div class="kicker">WELCOME TO CELVEX.STORE</div><h1>Discover. Shop. Enjoy.</h1><p>Explore useful products for your everyday needs, all in one simple place.</p><a class="primary-btn" href="#products">Shop Now →</a></div><div class="hero-image"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=400&q=80" alt="Headphones"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80" alt="Watch"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="Phone"></div></section>
+ <section class="section" id="categories"><div class="section-heading"><h2>Shop by Category</h2></div><div class="categories">
+  <a class="category" href="#products" data-category="Electronics"><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=300&q=80" alt="Electronics"><h3>Electronics</h3></a>
+  <a class="category" href="#products" data-category="Fashion"><img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?auto=format&fit=crop&w=300&q=80" alt="Fashion"><h3>Fashion</h3></a>
+  <a class="category" href="#products" data-category="Home"><img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=300&q=80" alt="Home"><h3>Home & Living</h3></a>
+  <a class="category" href="#products" data-category="Beauty"><img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=300&q=80" alt="Beauty"><h3>Beauty</h3></a>
+  <a class="category" href="#products" data-category="Footwear"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=300&q=80" alt="Footwear"><h3>Footwear</h3></a>
+ </div></section>
+ <section class="section products" id="products"><div class="section-heading"><h2>Popular Products</h2><a href="#categories" id="clearFilter">View all</a></div><div class="product-grid" id="productGrid"></div></section>
+</main>
+<footer id="footer"><div class="container"><div class="footer-content"><div class="footer-about"><h3>CelVex.Store</h3><p>Everyday shopping, made simple. Discover products for you and your home.</p></div><div><h3>Customer Help</h3><a href="#footer">Contact Us</a><a href="#footer">Delivery Information</a><a href="#footer">Returns Policy</a></div><div><h3>Quick Links</h3><a href="#home">Home</a><a href="#categories">Categories</a><a href="#products">Shop</a></div></div><div class="copyright">© <span id="year"></span> CelVex.Store. All rights reserved.</div></div></footer>
+<div class="cart-panel" id="cartPanel"><div class="cart-box"><div class="cart-title"><strong>Your Cart</strong><button id="closeCart" aria-label="Close cart">×</button></div><div class="cart-items" id="cartItems"></div><div class="cart-total"><span>Total</span><span id="cartTotal">Rs. 0</span></div><button class="checkout" id="checkout">Checkout</button></div></div>
+<div class="notice" id="notice"></div>
+<script>
+"use strict";
+const products=[
+ {id:1,name:"Wireless Headphones",category:"Electronics",price:5499,img:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80"},
+ {id:2,name:"Smart Watch",category:"Electronics",price:6999,img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80"},
+ {id:3,name:"Everyday Backpack",category:"Fashion",price:3899,img:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=500&q=80"},
+ {id:4,name:"Classic Sneakers",category:"Footwear",price:4599,img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=500&q=80"},
+ {id:5,name:"Digital Camera",category:"Electronics",price:18999,img:"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=500&q=80"},
+ {id:6,name:"Skincare Set",category:"Beauty",price:2499,img:"https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=500&q=80"},
+ {id:7,name:"Modern Chair",category:"Home",price:12999,img:"https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&fit=crop&w=500&q=80"},
+ {id:8,name:"Sports Dumbbells",category:"Sports",price:2999,img:"https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=500&q=80"}
+];
+let cart=[];
+let activeCategory="";
+const productGrid=document.getElementById("productGrid");
+const formatPrice=value=>"Rs. "+value.toLocaleString("en-PK");
+function showNotice(message){const box=document.getElementById("notice");box.textContent=message;box.classList.add("show");clearTimeout(showNotice.timer);showNotice.timer=setTimeout(()=>box.classList.remove("show"),1600);}
+function renderProducts(){
+ const term=document.getElementById("searchInput").value.trim().toLowerCase();
+ const shown=products.filter(item=>(!activeCategory||item.category===activeCategory)&&(!term||(item.name+" "+item.category).toLowerCase().includes(term)));
+ productGrid.innerHTML=shown.map(item=>`<article class="product"><img src="${item.img}" alt="${item.name}" loading="lazy"><h3>${item.name}</h3><div class="rating">★★★★★</div><div class="price">${formatPrice(item.price)}</div><button class="add-btn" data-add="${item.id}">Add to Cart</button></article>`).join("")||'<p class="empty">No products found.</p>';
+}
+function renderCart(){
+ const total=cart.reduce((sum,item)=>sum+item.price*item.qty,0);
+ document.getElementById("cartCount").textContent=cart.reduce((sum,item)=>sum+item.qty,0);
+ document.getElementById("cartTotal").textContent=formatPrice(total);
+ document.getElementById("cartItems").innerHTML=cart.length?cart.map(item=>`<div class="cart-row"><img src="${item.img}" alt=""><div><strong>${item.name}</strong><small>${formatPrice(item.price)} × ${item.qty}</small></div><button data-remove="${item.id}">Remove</button></div>`).join(""):'<p class="empty">Your cart is empty.</p>';
+}
+productGrid.addEventListener("click",event=>{
+ const button=event.target.closest("[data-add]");
+ if(!button)return;
+ const product=products.find(item=>item.id===Number(button.dataset.add));
+ if(!product)return;
+ const existing=cart.find(item=>item.id===product.id);
+ if(existing)existing.qty+=1;else cart.push({...product,qty:1});
+ renderCart();showNotice("Product added to cart");
+});
+document.getElementById("cartItems").addEventListener("click",event=>{
+ const button=event.target.closest("[data-remove]");
+ if(!button)return;
+ cart=cart.filter(item=>item.id!==Number(button.dataset.remove));renderCart();
+});
+document.getElementById("searchInput").addEventListener("input",renderProducts);
+document.getElementById("searchForm").addEventListener("submit",event=>{event.preventDefault();renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"});});
+document.querySelectorAll("[data-category]").forEach(link=>link.addEventListener("click",()=>{activeCategory=link.dataset.category;renderProducts();}));
+document.getElementById("clearFilter").addEventListener("click",()=>{activeCategory="";document.getElementById("searchInput").value="";renderProducts();});
+document.getElementById("cartBtn").addEventListener("click",()=>document.getElementById("cartPanel").classList.add("open"));
+document.getElementById("closeCart").addEventListener("click",()=>document.getElementById("cartPanel").classList.remove("open"));
+document.getElementById("cartPanel").addEventListener("click",event=>{if(event.target.id==="cartPanel")event.currentTarget.classList.remove("open");});
+document.getElementById("wishlistBtn").addEventListener("click",()=>showNotice("Wishlist can be added in the next stage."));
+document.getElementById("checkout").addEventListener("click",()=>showNotice("Demo only — checkout is not connected yet."));
+document.getElementById("year").textContent=String(new Date().getFullYear());
+renderProducts();renderCart();
+</script>
+</body>
+</html>
